@@ -35,35 +35,35 @@ public class GenresmsControllerUnitTests {
 
     @Test
     public void givenGenre_whenGetGenresByMovieUuid_thenReturnJsonGenres() throws Exception {
-        Genre genre1Movie1 = new Genre(1, 1, 1, "genre 1 movie 1");
-        Genre genre2Movie1 = new Genre(2, 1, 2, "genre 2 movie 1");
+        Genre genre1 = new Genre("964df97f-2cd4-4e1a-acf9-c21b2ad1e947",  "genre 1");
+        Genre genre2 = new Genre("964df97f-2cd4-4e1a-acf9-c21b2ad1e948",  "genre 2");
 
         List<Genre> genreList = new ArrayList<>();
-        genreList.add(genre1Movie1);
-        genreList.add(genre2Movie1);
+        genreList.add(genre1);
+        genreList.add(genre2);
 
-        given(genreRepository.findGenresWithMovieId(1)).willReturn(genreList);
+        given(genreRepository.findGenresByUuid("964df97f-2cd4-4e1a-acf9-c21b2ad1e947")).willReturn(genreList);
 
-        mockMvc.perform(get("/genres/movie/{movieUuid}", 1))
+        mockMvc.perform(get("/genres/{uuid}", "964df97f-2cd4-4e1a-acf9-c21b2ad1e947"))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(2)))
                 .andExpect(jsonPath("$[0].uuid", is(1)))
                 .andExpect(jsonPath("$[0].movieId", is(1)))
-                .andExpect(jsonPath("$[0].name", is("genre 1 movie 1")))
+                .andExpect(jsonPath("$[0].name", is("genre 1")))
                 .andExpect(jsonPath("$[1].uuid", is(2)))
                 .andExpect(jsonPath("$[1].movieId", is(1)))
-                .andExpect(jsonPath("$[1].name", is("genre 2 movie 1")));
+                .andExpect(jsonPath("$[1].name", is("genre 2")));
     }
 
     @Test
     public void givenGenre_whenGetAllGenres_thenReturnJsonGenres() throws Exception {
-        Genre genre1Movie1 = new Genre(1, 1, 1, "genre 1 movie 1");
-        Genre genre2Movie1 = new Genre(2, 1, 1, "genre 2 movie 1"));
+        Genre genre1 = new Genre("964df97f-2cd4-4e1a-acf9-c21b2ad1e947", "genre 1");
+        Genre genre2 = new Genre("964df97f-2cd4-4e1a-acf9-c21b2ad1e948", "genre 3");
 
         List<Genre> genreList = new ArrayList<>();
-        genreList.add(genre1Movie1);
-        genreList.add(genre2Movie1);
+        genreList.add(genre1);
+        genreList.add(genre2);
 
         given(genreRepository.findAll()).willReturn(genreList);
 
@@ -71,63 +71,12 @@ public class GenresmsControllerUnitTests {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(2)))
-                .andExpect(jsonPath("$[0].uuid", is(1)))
-                .andExpect(jsonPath("$[0].movieId", is(1)))
-                .andExpect(jsonPath("$[0].name", is("genre 1 movie 1")))
-                .andExpect(jsonPath("$[1].uuid", is(2)))
-                .andExpect(jsonPath("$[1].movieId", is(1)))
-                .andExpect(jsonPath("$[1].name", is("genre 2 movie 1")));
+                .andExpect(jsonPath("$[0].uuid", is("964df97f-2cd4-4e1a-acf9-c21b2ad1e947")))
+                .andExpect(jsonPath("$[0].name", is("genre 1")))
+                .andExpect(jsonPath("$[1].uuid", is("964df97f-2cd4-4e1a-acf9-c21b2ad1e948")))
+                .andExpect(jsonPath("$[1].name", is("genre 2")));
     }
 
-    @Test
-    public void whenPostGenre_thenReturnJsonGenre() throws Exception {
-        Genre genre1Movie1 = new Genre(1, 1, 1, "genre 1 movie 1");
 
-        mockMvc.perform(post("/genres")
-                .content(mapper.writeValueAsString(genre1Movie1))
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.uuid", is(1)))
-                .andExpect(jsonPath("$.movieId", is(1)))
-                .andExpect(jsonPath("$.name", is("genre 1 movie 1")));
-    }
 
-    @Test
-    public void givenGenre_whenPutGenre_thenReturnJsonGenre() throws Exception {
-        Genre genre1Movie1 = new Genre(1, 1, 1, "genre 1 movie 1");
-
-        given(genreRepository.findGenreByUuid(1)).willReturn(genre1Movie1);
-
-        Genre updatedGenre = new Genre(1, 1, 1, "genre 1 movie 1 updated");
-
-        mockMvc.perform(put("/genres")
-                .content(mapper.writeValueAsString(updatedGenre))
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.uuid", is(1)))
-                .andExpect(jsonPath("$.movieId", is(1)))
-                .andExpect(jsonPath("$.name", is("genre 1 movie 1 updated")));
-    }
-
-    @Test
-    public void givenGenre_whenDeleteGenre_thenStatusOk() throws Exception {
-        Genre genreToBeDeleted = new Genre(1, 1, 1,"genre to delete");
-
-        given(genreRepository.findGenreByUuid(1)).willReturn(genreToBeDeleted);
-
-        mockMvc.perform(delete("/genres/{uuid}", 1)
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
-    }
-
-    @Test
-    public void givenNoGenre_whenDeleteGenre_thenStatusNotFound() throws Exception {
-        given(genreRepository.findGenreByUuid(1000)).willReturn(null);
-
-        mockMvc.perform(delete("/genres/{uuid}", 1000)
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isNotFound());
-    }
 }

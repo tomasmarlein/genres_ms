@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 public class GenreController {
@@ -19,9 +20,9 @@ public class GenreController {
         return GenresRepository.findAll();
     }
 
-    @GetMapping("/genres/genre/{movieId}")
-    public List<Genre> getAllWithMovieId(@PathVariable Integer movieId){
-        return GenresRepository.findGenresWithMovieId(movieId);
+    @GetMapping("/genres/{uuid}")
+    public List<Genre> getGenreByUuid(@PathVariable String uuid){
+        return GenresRepository.findGenresByUuid(uuid);
     }
 
 }

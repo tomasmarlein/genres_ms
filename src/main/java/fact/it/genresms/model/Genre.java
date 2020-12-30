@@ -1,51 +1,40 @@
 package fact.it.genresms.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import javax.persistence.*;
+import java.util.UUID;
 
-import java.util.Date;
-
-@Document(collection = "Genre")
+@Entity
 public class Genre {
     @Id
-    private Integer id;
-    private Integer uuid;
-    private Integer movieId;
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @JsonIgnore
+    private int id;
+    @Column(unique=true)
+    private String uuid;
     private String name;
 
-    public Genre() {
-    }
-
-    public Genre(Integer id, Integer uuid, Integer movieId, String name) {
-        this.id = id;
+    public Genre(){}
+    public Genre(String uuid, String name){
         this.uuid = uuid;
-        this.movieId = movieId;
         this.name = name;
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public Integer getUuid() {
+    public String getUuid() {
         return uuid;
     }
 
-    public void setUuid(Integer uuid) {
+    public void setUuid(String uuid) {
         this.uuid = uuid;
-    }
-
-    public Integer getMovieId() {
-        return movieId;
-    }
-
-    public void setMovieId(Integer movieId) {
-        this.movieId = movieId;
     }
 
     public String getName() {
