@@ -1,6 +1,6 @@
 package fact.it.genresms;
 
-import fact.it.genresms.model.Genre;
+import fact.it.genresms.model.Genres;
 import fact.it.genresms.repository.GenresRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
@@ -12,7 +12,6 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import static org.hamcrest.Matchers.is;
@@ -35,10 +34,10 @@ public class GenresmsControllerUnitTests {
 
     @Test
     public void givenGenre_whenGetGenresByMovieUuid_thenReturnJsonGenres() throws Exception {
-        Genre genre1 = new Genre("964df97f-2cd4-4e1a-acf9-c21b2ad1e947",  "genre 1");
-        Genre genre2 = new Genre("964df97f-2cd4-4e1a-acf9-c21b2ad1e948",  "genre 2");
+        Genres genre1 = new Genres("964df97f-2cd4-4e1a-acf9-c21b2ad1e947",  "genre 1");
+        Genres genre2 = new Genres("964df97f-2cd4-4e1a-acf9-c21b2ad1e948",  "genre 2");
 
-        List<Genre> genreList = new ArrayList<>();
+        List<Genres> genreList = new ArrayList<>();
         genreList.add(genre1);
         genreList.add(genre2);
 
@@ -58,10 +57,10 @@ public class GenresmsControllerUnitTests {
 
     @Test
     public void givenGenre_whenGetAllGenres_thenReturnJsonGenres() throws Exception {
-        Genre genre1 = new Genre("964df97f-2cd4-4e1a-acf9-c21b2ad1e947", "genre 1");
-        Genre genre2 = new Genre("964df97f-2cd4-4e1a-acf9-c21b2ad1e948", "genre 3");
+        Genres genre1 = new Genres("964df97f-2cd4-4e1a-acf9-c21b2ad1e947", "genre 1");
+        Genres genre2 = new Genres("964df97f-2cd4-4e1a-acf9-c21b2ad1e948", "genre 3");
 
-        List<Genre> genreList = new ArrayList<>();
+        List<Genres> genreList = new ArrayList<>();
         genreList.add(genre1);
         genreList.add(genre2);
 

@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.util.UUID;
 
 @Entity
-public class Genre {
+public class Genres {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @JsonIgnore
@@ -15,8 +15,8 @@ public class Genre {
     private String uuid;
     private String name;
 
-    public Genre(){}
-    public Genre(String uuid, String name){
+    public Genres(){}
+    public Genres(String uuid, String name){
         this.uuid = uuid;
         this.name = name;
     }

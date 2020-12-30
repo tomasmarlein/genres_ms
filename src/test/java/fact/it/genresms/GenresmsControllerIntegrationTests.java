@@ -1,6 +1,6 @@
 package fact.it.genresms;
 
-import fact.it.genresms.model.Genre;
+import fact.it.genresms.model.Genres;
 import fact.it.genresms.repository.GenresRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.*;
@@ -9,8 +9,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-
-import java.util.Date;
 
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
@@ -28,10 +26,10 @@ public class GenresmsControllerIntegrationTests {
     @Autowired
     private GenresRepository genreRepository;
 
-    private Genre genre1 = new Genre("964df97f-2cd4-4e1a-acf9-c21b2ad1e947", "genre 1");
-    private Genre genre2 = new Genre("964df97f-2cd4-4e1a-acf9-c21b2ad1e948", "genre 2");
-    private Genre genre3 = new Genre("964df97f-2cd4-4e1a-acf9-c21b2ad1e949", "genre 3");
-    private Genre genreToBeDeleted = new Genre("964df97f-2cd4-4e1a-acf9-c21b2ad1e950", "genre 4 to be deleted");
+    private Genres genre1 = new Genres("964df97f-2cd4-4e1a-acf9-c21b2ad1e947", "genre 1");
+    private Genres genre2 = new Genres("964df97f-2cd4-4e1a-acf9-c21b2ad1e948", "genre 2");
+    private Genres genre3 = new Genres("964df97f-2cd4-4e1a-acf9-c21b2ad1e949", "genre 3");
+    private Genres genreToBeDeleted = new Genres("964df97f-2cd4-4e1a-acf9-c21b2ad1e950", "genre 4 to be deleted");
 
     @BeforeEach
     public void beforeAllTests() {

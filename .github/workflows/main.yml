@@ -3,7 +3,7 @@ name: Test, Build and Upload artifact
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   compile:
@@ -25,6 +25,21 @@ jobs:
     runs-on: ubuntu-latest
     needs: compile
     name: Java 8 build, deliver artifact and container
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_HOST: localhost
+          POSTGRES_USER: admin
+          POSTGRES_PASSWORD: secret
+          POSTGRES_DB: moviedb
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     steps:
       - uses: actions/checkout@v1
 
@@ -33,32 +48,21 @@ jobs:
         with:
           java-version: 8
 
-      - name: Start Mysql for integration test
-        uses: mirromutth/mysql-action@v1.1
-        with:
-          mysql database: 'moviedb' # Optional, default value is "test". The specified database which will be create
-          mysql root password: ${{ secrets.MYSQL_ROOT_PASSWORD }} # Required if "mysql user" is empty, default is empty. The root superuser password
-
       - name: Test and build project
         run: mvn -f pom.xml clean install
 
-      - name: Show contents of the current working directory
-        run: ls -la
-
-      - name: Show contents of the target directory
-        run: ls -la target
 
       - name: Upload Maven build artifact
         uses: actions/upload-artifact@v1
         with:
-          name: genre-service-artifact.jar
-          path: ./target/genre-service-0.0.1-SNAPSHOT.jar
+          name: genres-service-artifact.jar
+          path: ./target/genres_ms-0.0.1-SNAPSHOT.jar
 
       - name: Docker login
         run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Docker Build
-        run: docker build -t ${{ secrets.DOCKER_USER }}/genre-service-ex:latest .
+        run: docker build -t ${{ secrets.DOCKER_USER }}/genres-service:latest .
 
       - name: Upload container to Docker Hub with Push
-        run: docker push ${{ secrets.DOCKER_USER }}/genre-service-ex:latest
+        run: docker push ${{ secrets.DOCKER_USER }}/genres-service:latest
