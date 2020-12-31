@@ -10,6 +10,5 @@ import java.util.List;
 @Repository
 public interface GenresRepository extends JpaRepository<Genres, Integer> {
     List<Genres> findAll();
-    List<Genres> getAllByUuid(String uuid);
     List<Genres> findGenresByUuid(String uuid);
 }
