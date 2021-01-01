@@ -3,7 +3,7 @@ name: Test, Build and artifact
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   compile:
