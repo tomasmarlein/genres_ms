@@ -17,7 +17,7 @@ public class Genres {
 
     public Genres(){}
     public Genres(String uuid, String name){
-        this.uuid = uuid;
+        this.uuid = UUID.randomUUID().toString();
         this.name = name;
     }
 
