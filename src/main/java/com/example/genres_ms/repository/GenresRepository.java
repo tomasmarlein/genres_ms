@@ -1,6 +1,6 @@
-package com.example.genresms.repository;
+package com.example.genres_ms.repository;
 
-import com.example.genresms.model.Genre;
+import com.example.genres_ms.model.Genre;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

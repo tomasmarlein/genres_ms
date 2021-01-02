@@ -1,6 +1,6 @@
-package com.example.genresms.controller;
+package com.example.genres_ms.controller;
 
-import com.example.genresms.model.Genre;
+import com.example.genres_ms.model.Genre;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,8 +10,8 @@ import java.util.List;
 public class GenresController {
 
     @Autowired
-    private com.example.genresms.repository.GenresRepository GenresRepository;
-    
+    private com.example.genres_ms.repository.GenresRepository GenresRepository;
+
     @GetMapping("/genres/all")
     public List<Genre> getAllGenres(){
         return GenresRepository.findAll();

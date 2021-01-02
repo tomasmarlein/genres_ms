@@ -1,4 +1,4 @@
-package com.example.genresms.model;
+package com.example.genres_ms.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 

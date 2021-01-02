@@ -1,7 +1,7 @@
-package com.example.genresms;
+package com.example.genres_ms;
 
-import com.example.genresms.repository.GenresRepository;
-import com.example.genresms.model.Genre;
+import com.example.genres_ms.repository.GenresRepository;
+import com.example.genres_ms.model.Genre;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
