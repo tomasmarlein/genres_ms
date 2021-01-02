@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: fact.it.genresms.GenresMSControllerIntegrationTests
+-------------------------------------------------------------------------------
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.575 s - in fact.it.genresms.GenresMSControllerIntegrationTests

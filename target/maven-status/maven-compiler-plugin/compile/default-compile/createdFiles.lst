@@ -1,0 +1,4 @@
+fact\it\genresms\model\Genre.class
+fact\it\genresms\controller\GenresController.class
+fact\it\genresms\repository\GenresRepository.class
+fact\it\genresms\GenresmsApplication.class
