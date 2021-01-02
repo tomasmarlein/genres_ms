@@ -11,8 +11,7 @@ public class GenresController {
 
     @Autowired
     private com.example.genresms.repository.GenresRepository GenresRepository;
-
-
+    
     @GetMapping("/genres/all")
     public List<Genre> getAllGenres(){
         return GenresRepository.findAll();
