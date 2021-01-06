@@ -1,0 +1,58 @@
+apiVersion: apps/v1           # API version
+kind: Deployment              # Type of kubernetes resource
+metadata:
+  name: ms-genres-deployment    # Name of the deployment
+  labels:                     # Labels that will be applied to this deployment
+    app: genres-service
+spec:
+  replicas: 1                 # No. of replicas/pods to run in this deployment
+  selector:
+    matchLabels:              # The deployment applies to any pods mayching the specified labels
+      app: genres-service
+  template:                   # Template for creating the pods in this deployment
+    metadata:
+      labels:                 # Labels that will be applied to each Pod in this deployment
+        app: genres-service
+    spec:                     # Spec for the containers that will be run in the Pods
+      containers:
+        - name: watchlist-service
+          image: tomasmarlein/genres-service
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 8054 # The port that the container exposes
+          resources:
+            limits:
+              cpu: 0.2
+              memory: "200Mi"
+          env:                    # Environment variables supplied to the Pod
+            - name: POSTGRES_HOST
+              value: "10.100.2.2"
+            - name: POSTGRES_PORT
+              value: "5432"
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-db-secret
+                  key: POSTGRES_PASSWORD
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-db-secret
+                  key: POSTGRES_USER
+---
+apiVersion: v1                      # API version
+kind: Service                       # Type of the kubernetes resource
+metadata:
+  name: genres-service    # Name of the service
+  labels:                           # Labels that will be applied to this service
+    app: genres-service
+spec:
+  type: ClusterIP                    # The service will be exposed by opening a Port on each node and proxying it. Allowing connections from outside the cluster
+  selector:
+    app: genres-service   # The service exposes Pods with label `app=book-info-service-server`
+  ports:                            # Forward incoming connections on port 8080 to the target port 8051
+    - name: http
+      port: 8054
+      targetPort: 8054
+  clusterIP: 10.100.4.1
