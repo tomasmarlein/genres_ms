@@ -1,5 +1,6 @@
 package com.example.genres_ms;
 
+
 import com.example.genres_ms.repository.GenresRepository;
 import com.example.genres_ms.model.Genre;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -28,6 +29,7 @@ public class GenresMSControllerIntegrationTests {
 
     @Autowired
     private GenresRepository genreRepository;
+
     private int initialNumberGenrelist = 0;
 
     private Genre genre1 = new Genre(UUID.fromString("964df97f-2cd4-4e1a-acf9-c21b2ad1e947"), "genre 1");
@@ -35,13 +37,17 @@ public class GenresMSControllerIntegrationTests {
     private Genre genre3 = new Genre(UUID.fromString("964df97f-2cd4-4e1a-acf9-c21b2ad1e949"), "genre 3");
     private Genre genreToBeDeleted = new Genre(UUID.fromString("964df97f-2cd4-4e1a-acf9-c21b2ad1e950"), "genre 4 to be deleted");
 
+
     @BeforeEach
     public void beforeAllTests() {
         initialNumberGenrelist = genreRepository.findAll().size();
+
+
         genreRepository.save(genre1);
         genreRepository.save(genre2);
         genreRepository.save(genre3);
         genreRepository.save(genreToBeDeleted);
+
     }
 
     @AfterEach
@@ -49,6 +55,8 @@ public class GenresMSControllerIntegrationTests {
         genreRepository.deleteById(genre1.getId());
         genreRepository.deleteById(genre2.getId());
         genreRepository.deleteById(genre3.getId());
+        genreRepository.deleteById(genreToBeDeleted.getId());
+
     }
 
     private ObjectMapper mapper = new ObjectMapper();
@@ -67,5 +75,7 @@ public class GenresMSControllerIntegrationTests {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
+
+
 
 }
