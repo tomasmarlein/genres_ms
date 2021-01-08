@@ -1,4 +1,20 @@
 -------------------------------------------------------------------------------
 Test set: com.example.genres_ms.GenresMSControllerUnitTests
 -------------------------------------------------------------------------------
-Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 10.92 s - in com.example.genres_ms.GenresMSControllerUnitTests
+Tests run: 2, Failures: 0, Errors: 2, Skipped: 0, Time elapsed: 2.894 s <<< FAILURE! - in com.example.genres_ms.GenresMSControllerUnitTests
+requestOneGenreItem_thenReturnJsonGenre  Time elapsed: 0.001 s  <<< ERROR!
+org.springframework.web.util.NestedServletException: Request processing failed; nested exception is org.springframework.dao.DataAccessResourceFailureException: Could not create JPA EntityManager; nested exception is org.hibernate.service.spi.ServiceException: Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment]
+	at com.example.genres_ms.GenresMSControllerUnitTests.requestOneGenreItem_thenReturnJsonGenre(GenresMSControllerUnitTests.java:60)
+Caused by: org.springframework.dao.DataAccessResourceFailureException: Could not create JPA EntityManager; nested exception is org.hibernate.service.spi.ServiceException: Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment]
+	at com.example.genres_ms.GenresMSControllerUnitTests.requestOneGenreItem_thenReturnJsonGenre(GenresMSControllerUnitTests.java:60)
+Caused by: org.hibernate.service.spi.ServiceException: Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment]
+Caused by: org.hibernate.HibernateException: Access to DialectResolutionInfo cannot be null when 'hibernate.dialect' not set
+
+requestAllItemsOnGenre_thenReturnJsonGenreList  Time elapsed: 0 s  <<< ERROR!
+org.springframework.web.util.NestedServletException: Request processing failed; nested exception is org.springframework.dao.DataAccessResourceFailureException: Could not create JPA EntityManager; nested exception is org.hibernate.service.spi.ServiceException: Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment]
+	at com.example.genres_ms.GenresMSControllerUnitTests.requestAllItemsOnGenre_thenReturnJsonGenreList(GenresMSControllerUnitTests.java:45)
+Caused by: org.springframework.dao.DataAccessResourceFailureException: Could not create JPA EntityManager; nested exception is org.hibernate.service.spi.ServiceException: Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment]
+	at com.example.genres_ms.GenresMSControllerUnitTests.requestAllItemsOnGenre_thenReturnJsonGenreList(GenresMSControllerUnitTests.java:45)
+Caused by: org.hibernate.service.spi.ServiceException: Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment]
+Caused by: org.hibernate.HibernateException: Access to DialectResolutionInfo cannot be null when 'hibernate.dialect' not set
+
