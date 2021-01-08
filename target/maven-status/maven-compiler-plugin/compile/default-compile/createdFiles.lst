@@ -1,0 +1,4 @@
+com\example\genres_ms\repository\GenresRepository.class
+com\example\genres_ms\controller\GenresController.class
+com\example\genres_ms\model\Genre.class
+com\example\genres_ms\GenresmsApplication.class

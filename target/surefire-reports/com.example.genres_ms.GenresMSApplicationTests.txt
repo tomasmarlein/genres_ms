@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.example.genres_ms.GenresMSApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 18.127 s - in com.example.genres_ms.GenresMSApplicationTests
