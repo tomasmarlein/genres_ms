@@ -1,7 +1,9 @@
 package com.example.genres_ms;
 
+import com.example.genres_ms.model.Movie_Genre;
 import com.example.genres_ms.repository.GenresRepository;
 import com.example.genres_ms.model.Genre;
+import com.example.genres_ms.repository.MoviesGenresRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,7 @@ public class GenresMSControllerUnitTests {
 
     @MockBean
     private GenresRepository genreRepository;
+    private MoviesGenresRepository moviesgenresRepository;
 
     private ObjectMapper mapper = new ObjectMapper();
 
@@ -62,5 +65,19 @@ public class GenresMSControllerUnitTests {
                 .andExpect(status().isOk());
     }
 
+    @Test
+    public void requestAllItemsOnMoviesGenre_thenReturnJsonMoviesGenreList() throws Exception {
+        Movie_Genre movie_genre = new Movie_Genre("2f48b395-b7ea-47cd-a503-e8f1cb630958", "964df97f-2cd4-4e1a-acf9-c21b2ad1e947");
+
+        List<Movie_Genre> movie_genreList = Collections.singletonList(movie_genre);
+
+
+        given(moviesgenresRepository.findAll()).willReturn(movie_genreList);
+
+        mockMvc.perform(get("/movies/genre/{genre_uuid}"))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(1)));
+    }
 
 }
