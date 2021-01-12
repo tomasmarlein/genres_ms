@@ -53,11 +53,11 @@ public class GenresMSControllerUnitTests {
     public void requestOneGenreItem_thenReturnJsonGenre() throws Exception {
         Genre genre = new Genre(UUID.fromString("964df97f-2cd4-4e1a-acf9-c21b2ad1e947"),  "genre 1");
 
-        List<Genre> genreList = Collections.singletonList(genre);
-
-        given(genreRepository.findGenresByUuid("964df97f-2cd4-4e1a-acf9-c21b2ad1e947")).willReturn(genreList);
+        given(genreRepository.findFirstByUuid(genre.getUuid())).willReturn(genre);
 
         mockMvc.perform(get("/genres/{uuid}", genre.getUuid()))
+                .andExpect(jsonPath("$.uuid", is(genre.getUuid())))
+                .andExpect(jsonPath("$.name", is(genre.getName())))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }

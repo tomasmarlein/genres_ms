@@ -71,8 +71,10 @@ public class GenresMSControllerIntegrationTests {
 
     @Test
     public void requestOneGenreItem_thenReturnJsonGenre() throws Exception {
-        mockMvc.perform(get("/genres/{uuid}", "964df97f-2cd4-4e1a-acf9-c21b2ad1e947"))
+        mockMvc.perform(get("/genres/{uuid}", genre1.getUuid()))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.uuid", is(genre1.getUuid())))
+                .andExpect(jsonPath("$.name", is(genre1.getName())))
                 .andExpect(status().isOk());
     }
 

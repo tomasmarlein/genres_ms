@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface GenresRepository extends JpaRepository<Genre, Integer> {
-    List<Genre> findGenresByUuid(String uuid);
+    Genre findFirstByUuid(String uuid);
 }

@@ -18,8 +18,8 @@ public class GenresController {
     }
 
     @GetMapping("/genres/{uuid}")
-    public List<Genre> getGenresByUuid(@PathVariable String uuid){
-        return GenresRepository.findGenresByUuid(uuid);
+    public Genre getGenreByUUID(@PathVariable String uuid){
+        return GenresRepository.findFirstByUuid(uuid);
     }
 
 }
